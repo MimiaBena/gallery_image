@@ -69,6 +69,28 @@ function saveImage($savedImageBasename, $nom_table){
     }
 
 
+    $fetchImage= fetch_image($nom_table);
+
+  //récuperer les données de la base
+    function fetch_image($nom_table){
+        global $database;
+        $nom_table= trim($nom_table);
+        if(!empty($nom_table)){
+            $query = "SELECT * FROM ".$nom_table." ORDER BY id DESC";
+        $result = mysqli_query($database, $query);
+            if ($result->num_rows > 0) {
+                $row= $result->fetch_all(MYSQLI_ASSOC);
+                 return $row;       
+             }else{
+    
+         echo "No Image is stored in the database";
+                   }
+            
+                               }else{
+            echo "Déclarer une table";
+        }
+    }
+
 
 
 
